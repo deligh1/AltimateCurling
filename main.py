@@ -84,7 +84,7 @@ class Stones:
     FRICTION = 0
     ELASTICITY = 1
     NAME = "Stone"
-    IMAGE_PATH = None
+    IMAGE_NAME = "normal.png"
 
     def __init__(self, space, player, y, strength, angle, altimate=False):
         self.space = space
@@ -96,20 +96,21 @@ class Stones:
         self.shape.elasticity = self.ELASTICITY
         self.space.add(self.body, self.shape)
         self.body.velocity = (strength * pymunk.Vec2d(3, 0).rotated(-angle))
+        self.image_path = f"./img/p{self.player+1}/{self.IMAGE_NAME}"
 
     def update(self):
         self.body.velocity -= self.body.velocity / self.body.velocity.length * 0.05  # Simulate friction
 
 class NormalStone(Stones):
     NAME = "ノーマルストーン"
-    IMAGE_PATH = "./img/p{player}/normal.png"
+    IMAGE_NAME = "normal.png"
     def update(self):
         super().update()
     
 class HeavyStone(Stones):
     WEIGHT = 3
     NAME = "ヘビーストーン"
-    IMAGE_PATH = "./img/p1/heavy.png"
+    IMAGE_NAME = "heavy.png"
 
     def update(self):
         super().update()
